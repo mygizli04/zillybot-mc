@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 interface SavedData {
     players: Player[];
     deaths: number;
@@ -83,7 +85,7 @@ fs.access("./saved_data.json", (err) => {
                 logAndThrow(new Error("Could not validate saved data!"));
             }
 
-            data = getSavedDataWithDate(data)
+            data = getSavedDataWithDate(data);
 
             cache = data;
         }).catch(err => {
@@ -109,23 +111,14 @@ export function setSavedData (data: SavedData) {
 }
 
 function getSavedDataWithoutDate (data: SavedData) {
-    // Change number type to Date
-    data.players.map(player => {
-        player.firstSeen = new Date(player.firstSeen);
-        player.lastSeen = new Date(player.lastSeen);
-    });
+    // Dang javascript!!!
+    // This has to be here so javascript will not overwrite the original variable.
+    // Why is that even a thing?
+    const mut = _.cloneDeep(data)
 
-    data.mails.map(mail => {
-        mail.sentOn = new Date(mail.sentOn);
-    });
-
-    return data
-}
-
-function getSavedDataWithDate (data: SavedData) {
     // Change back Date type to number type
 
-    data.players.map(player => {
+    mut.players.map(player => {
         // @ts-expect-error | Who needs typechecking when you can just ignore errors lmao
         player.firstSeen = player.firstSeen.getTime();
 
@@ -133,10 +126,26 @@ function getSavedDataWithDate (data: SavedData) {
         player.lastSeen = player.lastSeen.getTime();
     });
 
-    data.mails.map(mail => {
+    mut.mails.map(mail => {
         // @ts-expect-error | Who needs typechecking when you can just ignore errors lmao
         mail.sentOn = mail.sentOn.getTime();
     });
 
-    return data
+    return mut;
+}
+
+function getSavedDataWithDate (data: SavedData) {
+    const mut = _.cloneDeep(data)
+
+    // Change number type to Date
+    mut.players.map(player => {
+        player.firstSeen = new Date(player.firstSeen);
+        player.lastSeen = new Date(player.lastSeen);
+    });
+
+    mut.mails.map(mail => {
+        mail.sentOn = new Date(mail.sentOn);
+    });
+
+    return mut;
 }
