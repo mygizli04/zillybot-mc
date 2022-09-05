@@ -3,6 +3,7 @@ import * as helpers from './helpers';
 import * as chatCommands from './new_chat_commands';
 
 import { Bot } from 'mineflayer';
+import { onHealthChange } from './health_alert';
 
 export function initHooks(bot: Bot) {
   bot.on('chat', (username, message) => {
@@ -27,6 +28,12 @@ export function initHooks(bot: Bot) {
 
     logger.log('message', messagestr)
   })
+
+  if ((process.env.ATTACK_ALERT === "TRUE") || (process.env.DISCONNECT_ON_ATTACK === "TRUE")) {
+    bot.on("health", () => {
+      onHealthChange(bot)
+    })
+  }
 
   // bot.on('playerJoined', (player) => {
   //   logger.log('server', `${player.username} joined the game`)
