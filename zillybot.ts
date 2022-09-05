@@ -6,6 +6,9 @@ import mineflayer from 'mineflayer';
 import * as logger from './src/logger';
 import { initHooks } from './src/hooks';
 
+// Prepare saved data for future use.
+import "./src/saved_data.js";
+
 require('dotenv').config()
 
 prompt.start()

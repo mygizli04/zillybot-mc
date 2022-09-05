@@ -6,6 +6,8 @@ import { Bot } from 'mineflayer';
 import { onHealthChange } from './health_alert';
 import { onTick } from './entity_alert';
 
+import * as savedData from "./saved_data"
+
 export function initHooks(bot: Bot) {
   bot.on('chat', (username, message) => {
     logger.log('chat', `<${username}> ${message}`)
@@ -42,9 +44,30 @@ export function initHooks(bot: Bot) {
     })
   }
 
-  // bot.on('playerJoined', (player) => {
-  //   logger.log('server', `${player.username} joined the game`)
-  // })
+  bot.on('playerJoined', (player) => {
+    if (player.username === bot.username) return;
+    
+    const currentData = savedData.getSavedData()
+    let playerData = currentData.players.find(savedPlayer => savedPlayer.uuid === player.uuid);
+
+    if (!playerData) {
+      playerData = {
+        name: player.username,
+        uuid: player.uuid,
+        deaths: 0,
+        firstSeen: new Date(),
+        kills: 0,
+        lastSeen: new Date()
+      }
+
+      currentData.players.push(playerData)
+    }
+    else {
+      playerData.lastSeen = new Date()
+    }
+
+    savedData.setSavedData(currentData)
+  })
 
   // bot.on('playerLeft', (player) => {
   //   logger.log('server', `${player.username} left the game`)

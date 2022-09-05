@@ -12,7 +12,7 @@ export interface Command {
      * @param args The arguments to this command.
      * @returns The message to be sent to the player
      */
-    run(args: string[]): string;
+    run(args: string[], player: string): string;
 }
 
 const commands: Command[] = []
@@ -46,5 +46,5 @@ export function onMessage(bot: Bot, username: string, message: string) {
     }
 
     logger.log("bot", `Running command: ${cmd}`)
-    bot.chat(commandToRun.run(args))
+    bot.chat(commandToRun.run(args, username))
 }

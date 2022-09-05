@@ -39,7 +39,7 @@ Building a headless client that can be used as interactive terminal client and a
     + [ ] parse the logfile or use a database to get stats
 - [ ] chat commands about stats
     + [ ] !lastseen
-    + [ ] !firstseen
+    + [x] !firstseen
     + [ ] !deaths
     + [ ] !kills
     + [x] !seed
