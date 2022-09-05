@@ -27,10 +27,10 @@ Building a headless client that can be used as interactive terminal client and a
 
 - [x] chatting
 - [ ] show inventory
-- [ ] notify user about danger
+- [x] notify user about danger
     + [x] alert/disconnect on damage
-    + [ ] alert/disconnect on creeper nearby
-    + [ ] alert/disconnect on player nearby
+    + [x] alert/disconnect on creeper nearby
+    + [x] alert/disconnect on player nearby
 
 ### bot client
 
