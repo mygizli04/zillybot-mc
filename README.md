@@ -9,7 +9,7 @@ Nothing to see here. The cool library that makes it all happen is https://github
 ## getting started
 
     cp env.example .env
-    vim .env
+    nano .env
     npm install
     npm start
 
