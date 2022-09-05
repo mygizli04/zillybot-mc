@@ -1,9 +1,9 @@
-const crypto = require('crypto')
-const fs = require('fs')
+import crypto from 'crypto';
+import fs from 'fs';
 
-const logger = require('./logger')
+import * as logger from './logger';
 
-const ipHashMatch = (ip, hash) => {
+const ipHashMatch = (ip: string, hash: string) => {
   ip = ip.toLowerCase()
   hash = hash.toLowerCase()
   if (ip === hash) return true
@@ -37,7 +37,7 @@ const ipHashMatch = (ip, hash) => {
   return false
 }
 
-const isValidHash = (hash) => {
+const isValidHash = (hash: string) => {
   // sha256 hex
   if (/^[A-Fa-f0-9]{64}$/.test(hash)) return true
   // sha1 hex
@@ -54,7 +54,9 @@ const isValidHash = (hash) => {
   return false
 }
 
-const onMessage = (bot, username, message) => {
+import { Bot } from 'mineflayer';
+
+export function onMessage (bot: Bot, username: string, message: string) {
   if (message[0] !== '!') return
 
   const input = message.slice(1).split(' ')
@@ -78,21 +80,23 @@ const onMessage = (bot, username, message) => {
       bot.chat(`${username}: Error: invalid hash. Supported hashes are md5, sha1 and sha256.`)
       return
     }
+    
+    // Private data according to README so cannot infer types in this function.
     fs.readFile('./data/data.json', (err, dataText) => {
       if (err) {
         logger.logAndThrow(err)
       }
-      const data = JSON.parse(dataText)
+      const data = JSON.parse(dataText.toString())
       let message = `${username}: Unkown hash probably a honeypot`
-      data.validIps.forEach((valid) => {
-        valid.ips.forEach((validIp) => {
+      data.validIps.forEach((valid: any) => {
+        valid.ips.forEach((validIp: any) => {
           if (ipHashMatch(validIp, args[0])) {
             message = `${username}: this is a known legit ip (${valid.note})`
           }
         })
       })
-      data.honeypots.forEach((honeypot) => {
-        honeypot.ips.forEach((honeyIp) => {
+      data.honeypots.forEach((honeypot: any) => {
+        honeypot.ips.forEach((honeyIp: any) => {
           if (ipHashMatch(honeyIp, args[0])) {
             message = `${username}: this is a known honeypot ip (${honeypot.note})`
           }
@@ -101,8 +105,4 @@ const onMessage = (bot, username, message) => {
       bot.chat(message)
     })
   }
-}
-
-module.exports = {
-  onMessage
 }

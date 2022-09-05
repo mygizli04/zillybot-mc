@@ -1,6 +1,8 @@
-const logger = require('./logger')
+import * as logger from './logger';
 
-const printPlayerList = (bot) => {
+import { Bot } from 'mineflayer';
+
+export function printPlayerList(bot: Bot) {
   const width = 30
   logger.log('players', `+-${Array(width).join('-')}-+`)
   for (const player of Object.values(bot.players)) {
@@ -8,8 +10,4 @@ const printPlayerList = (bot) => {
     logger.log('players', `| ${player.username}${Array(padding).join(' ')} |`)
   }
   logger.log('players', `+-${Array(width).join('-')}-+`)
-}
-
-module.exports = {
-  printPlayerList
 }

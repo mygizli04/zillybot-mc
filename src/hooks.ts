@@ -1,8 +1,10 @@
-const logger = require('./logger')
-const helpers = require('./helpers')
-const chatCommands = require('./chat_commands')
+import * as logger from './logger';
+import * as helpers from './helpers';
+import * as chatCommands from './chat_commands';
 
-const initHooks = (bot) => {
+import { Bot } from 'mineflayer';
+
+export function initHooks(bot: Bot) {
   bot.on('chat', (username, message) => {
     logger.log('chat', `<${username}> ${message}`)
     if (username === bot.username) return
@@ -38,11 +40,7 @@ const initHooks = (bot) => {
     helpers.printPlayerList(bot)
   })
 
-  bot.once('connect', () => {
+  bot.once('login', () => {
     logger.log('bot', 'connected to server.')
   })
-}
-
-module.exports = {
-  initHooks
 }

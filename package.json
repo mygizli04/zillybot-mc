@@ -4,7 +4,8 @@
   "description": "",
   "main": "zillybot.js",
   "scripts": {
-    "test": "npx standard"
+    "test": "npx standard",
+    "start": "node ./out/zillybot.js"
   },
   "author": "ChillerDragon",
   "license": "ISC",
@@ -12,5 +13,8 @@
     "dotenv": "^16.0.2",
     "mineflayer": "^4.4.0",
     "prompt": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/prompt": "^1.1.3"
   }
 }
