@@ -11,11 +11,11 @@ Nothing to see here. The cool library that makes it all happen is https://github
     cp env.example .env
     vim .env
     npm install
-    node zillybot.js
+    npm start
 
 ### private data (ignore this, its just for me)
 
-    git clone git@github.com:ChillerDragon/zillybot-mc-data.git data
+    git clone git@github.com:mygizli04/zillybot-mc-data.git data
     cd data
     ./setup.sh
 

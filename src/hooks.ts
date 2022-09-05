@@ -1,6 +1,6 @@
 import * as logger from './logger';
 import * as helpers from './helpers';
-import * as chatCommands from './chat_commands';
+import * as chatCommands from './new_chat_commands';
 
 import { Bot } from 'mineflayer';
 
