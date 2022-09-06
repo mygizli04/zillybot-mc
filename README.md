@@ -47,7 +47,6 @@ Building a headless client that can be used as interactive terminal client and a
     + [ ] !deaths
     + [ ] !kills
     + [x] !seed
-    + [x] !checkhash
     + [ ] !mail
 - [ ] bridge minecraft chat to irc
 
