@@ -21,7 +21,7 @@ function validateSavedData (obj: any): obj is SavedData {
     return true;
 }
 
-interface Player {
+export interface Player {
     name: string;
     uuid: string;
     firstSeen: Date;

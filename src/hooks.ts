@@ -23,7 +23,21 @@ export function initHooks(bot: Bot) {
   })
 
   bot.on("playerDeath", data => {
+    if (data.victim.type !== "player") return;
 
+    const currentData = savedData.getSavedData();
+
+    if (data.victim.id === bot.player.uuid) {
+      currentData.deaths++
+      savedData.setSavedData(currentData)
+    }
+    else {
+      let player = currentData.players.find(player => player.uuid === bot.player.uuid);
+
+      if (!player) {
+        // We need to get the player info, obviously
+      }
+    }
   })
 
   // bot.on('message', (message) => {
