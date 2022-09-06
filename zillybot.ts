@@ -46,6 +46,8 @@ function reconnect(msg: string, chatPrompt: ChatPrompt) {
   }, 1000 * delay)
 }
 
+import deathEvent from "./mineflayer-death-event"
+
 function connect(chatPrompt: ChatPrompt) {
   if (!process.env.SERVER_IP) {
     logger.logAndThrow(new Error("Server ip not set in environment variables?"))
@@ -70,6 +72,8 @@ function connect(chatPrompt: ChatPrompt) {
     // version: false,
     auth: process.env.MC_PASSWORD ? 'microsoft': "offline"
   })
+
+  bot.loadPlugin(deathEvent)
 
   logger.log('bot', `connecting to ${process.env.SERVER_IP} ...`)
 

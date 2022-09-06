@@ -22,6 +22,10 @@ export function initHooks(bot: Bot) {
     bot.chat('I am a bot. My code is here: https://github.com/ChillerDragon/zillybot-mc')
   })
 
+  bot.on("playerDeath", data => {
+
+  })
+
   // bot.on('message', (message) => {
   //   console.log(message)
   // })
