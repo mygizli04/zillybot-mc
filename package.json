@@ -5,7 +5,7 @@
   "main": "zillybot.js",
   "scripts": {
     "test": "npx standard",
-    "start": "node ./out/zillybot.js"
+    "start": "tsc -p . && node ./out/zillybot.js"
   },
   "author": "ChillerDragon",
   "license": "ISC",
